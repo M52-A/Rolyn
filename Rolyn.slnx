@@ -4,7 +4,7 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Rolyn/Rolyn.vcxproj">
+  <Project Path="Rolyn/Rolyn.vcxproj" Id="f9757312-0384-4cfd-897c-2b835ee4238f">
     <Deploy />
   </Project>
 </Solution>
