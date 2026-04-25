@@ -92,7 +92,7 @@
                     <Button Width="40" Height="40" CornerRadius="10" BorderThickness="0" Background="Transparent" x:Name="PreviousButton">
                         <FontIcon FontSize="18" Glyph="&#xF8AC;"/>
                     </Button>
-                    <Button Width="56" Height="56" CornerRadius="30" BorderThickness="3" BorderBrush="{ThemeResource SystemAccentColor}">
+                    <Button Width="56" Height="56" CornerRadius="30" BorderThickness="3" BorderBrush="{ThemeResource SystemAccentColor}" Click="TogglePlayButton_Click">
                         <Grid>
                             <FontIcon Visibility="Visible" FontSize="20" Glyph="&#xF5B0;" x:Name="PlayIcon"/>
                             <FontIcon Visibility="Collapsed" FontSize="20" Glyph="&#xF8AE;" x:Name="PauseIcon"/>

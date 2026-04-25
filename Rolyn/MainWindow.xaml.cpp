@@ -28,6 +28,14 @@ namespace winrt::Rolyn::implementation
 		throw hresult_not_implemented();
 	}
 
+	void MainWindow::InitializeComponent()
+	{
+		MainWindowT::InitializeComponent();
+
+		m_playIcon = PlayIcon();
+		m_pauseIcon = PauseIcon();
+	}
+
 	winrt::Windows::Foundation::IAsyncAction MainWindow::OpenFile_Click(winrt::Windows::Foundation::IInspectable const &sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const &e)
 	{
 		OpenFile().IsEnabled(false);
@@ -48,4 +56,11 @@ namespace winrt::Rolyn::implementation
 
 		OpenFile().IsEnabled(true);
 	}
+}
+
+void winrt::Rolyn::implementation::MainWindow::TogglePlayButton_Click(winrt::Windows::Foundation::IInspectable const &sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const &e)
+{
+	auto state = core.TogglePlay();
+	m_playIcon.Visibility(state == Windows::Media::Playback::MediaPlayerState::Playing ? winrt::Microsoft::UI::Xaml::Visibility::Collapsed : winrt::Microsoft::UI::Xaml::Visibility::Visible);
+	m_pauseIcon.Visibility(state == Windows::Media::Playback::MediaPlayerState::Playing ? winrt::Microsoft::UI::Xaml::Visibility::Visible : winrt::Microsoft::UI::Xaml::Visibility::Collapsed);
 }

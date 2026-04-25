@@ -10,6 +10,9 @@ namespace Player
 
 	public:
 		winrt::Windows::Foundation::IAsyncAction Load(std::wstring path);
+		void Play();
+		void Pause();
+		winrt::Windows::Media::Playback::MediaPlayerState TogglePlay();
 	};
 }
 
