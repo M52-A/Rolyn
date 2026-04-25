@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MainWindow.g.h"
+#include "PlayerCore.h"
 
 namespace winrt::Rolyn::implementation
 {
@@ -10,6 +11,10 @@ namespace winrt::Rolyn::implementation
 
         int32_t MyProperty();
         void MyProperty(int32_t value);
+        winrt::Windows::Foundation::IAsyncAction OpenFile_Click(winrt::Windows::Foundation::IInspectable const &sender, winrt::Microsoft::UI::Xaml::RoutedEventArgs const &e);
+
+    private:
+        Player::PlayerCore core;
     };
 }
 

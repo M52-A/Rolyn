@@ -44,7 +44,7 @@
 
             <Grid>
                 <Frame x:Name="ContentFrame"/>
-                <Button Content="Open File" HorizontalAlignment="Center"/>
+                <Button Content="Open File" HorizontalAlignment="Center" x:Name="OpenFile" Click="OpenFile_Click"/>
             </Grid>
         </NavigationView>
 
