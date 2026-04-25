@@ -8,8 +8,139 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Title="Rolyn">
+    <Window.SystemBackdrop>
+        <MicaBackdrop/>
+    </Window.SystemBackdrop>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="125"/>
+        </Grid.RowDefinitions>
 
+        <NavigationView x:Name="Navigation" Grid.Row="0" IsSettingsVisible="True" IsBackButtonVisible="Visible" IsBackEnabled="{x:Bind ContentFrame.CanGoBack, Mode=OneWay}"
+                        AlwaysShowHeader="True" PaneDisplayMode="Auto">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Icon="Home" Content="Home" Tag="HomePage" x:Name="HomePage"/>
+                <NavigationViewItem Icon="Audio" Content="Musics" Tag="SongsListPage" x:Name="MusicsPage"/>
+                <NavigationViewItem Content="Albums" Tag="AlbumsListPage" x:Name="AlbumsListPage">
+                    <NavigationViewItem.Icon>
+                        <FontIcon Glyph="&#xE93C;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Icon="Contact" Content="Artists" Tag="ArtistsListPage" x:Name="ArtistsPage"/>
+                <NavigationViewItemSeparator/>
+                <NavigationViewItem Content="Play Queue" Tag="PlayQueuePage" x:Name="PlayQueuePage">
+                    <NavigationViewItem.Icon>
+                        <PathIcon Data="M64 2026h1920q26 0 45 -19t19 -45t-19 -45t-45 -19h-1920q-26 0 -45 19t-19 45t19 45t45 19zM64 1514h1920q26 0 45 -19t19 -45t-19 -45t-45 -19h-1920q-26 0 -45 19t-19 45t19 45t45 19zM0 1140q0 20 7.5 37t21 30.5t30.5 21t37 7.5q14 0 24.5 -3t22.5 -10l478 -265 q23 -13 36 -35.5t13 -48.5t-13 -48.5t-36 -35.5l-478 -266q-21 -12 -47 -12q-20 0 -37 7.5t-30.5 21t-21 31t-7.5 36.5v532zM832 1002h1152q26 0 45 -19t19 -45t-19 -45t-45 -19h-1152q-26 0 -45 19t-19 45t19 45t45 19z"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="Playlists" Tag="PlaylistsPage" x:Name="PlaylistsPage">
+                    <NavigationViewItem.Icon>
+                        <PathIcon Data="M504 2048h1040q75 0 143.5 -30.5t120 -82t82 -120t30.5 -143.5v-1040q0 -75 -30.5 -143.5t-82 -120t-120 -82t-143.5 -30.5h-1040q-75 0 -143.5 30.5t-120 82t-82 120t-30.5 143.5v1040q0 75 30.5 143.5t82 120t120 82t143.5 30.5zM1541 1920h-1034q-50 0 -95.5 -20.5 t-80 -55t-55 -80t-20.5 -95.5v-1034q0 -50 20.5 -95.5t55 -80t80 -55t95.5 -20.5h1034q50 0 95.5 20.5t80 55t55 80t20.5 95.5v1034q0 50 -20.5 95.5t-55 80t-80 55t-95.5 20.5zM384 1152q0 133 50 249.5t137 203.5t203.5 137t249.5 50t249.5 -50t203.5 -137t137 -203.5 t50 -249.5t-50 -249.5t-137 -203.5t-203.5 -137t-249.5 -50t-249.5 50t-203.5 137t-137 203.5t-50 249.5zM1536 1152q0 106 -40 199.5t-109.5 163t-163 109.5t-199.5 40t-199.5 -40t-163 -109.5t-109.5 -163t-40 -199.5t40 -199.5t109.5 -163t163 -109.5t199.5 -40 q103 0 195.5 39.5t163 107.5t112 159.5t41.5 195.5v10zM896 1152q0 27 10 50.5t27 40.5t40.5 27t50.5 10t50 -10t40.5 -27.5t27.5 -40.5t10 -50q0 -26 -10 -49.5t-27.5 -41t-41 -27.5t-49.5 -10q-27 0 -50 10t-40.5 27.5t-27.5 40.5t-10 50zM448 128h1152q26 0 45 -19 t19 -45t-19 -45t-45 -19h-1152q-26 0 -45 19t-19 45t19 45t45 19z"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+            </NavigationView.MenuItems>
+
+            <Grid>
+                <Frame x:Name="ContentFrame"/>
+                <Button Content="Open File" HorizontalAlignment="Center"/>
+            </Grid>
+        </NavigationView>
+
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <Grid ColumnSpacing="10" Margin="10 5 10 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" VerticalAlignment="Center" x:Name="ElapsedTime">00:00</TextBlock>
+                <Slider Grid.Column="1" VerticalAlignment="Center" x:Name="Slider"/>
+                <TextBlock Grid.Column="2" VerticalAlignment="Center" x:Name="TotalTime">00:00</TextBlock>
+            </Grid>
+            <Grid Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" MinWidth="275"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*" MinWidth="90"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Padding="2 0 10 0" BorderThickness="0" Background="Transparent" CornerRadius="10">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <Border Margin="0 2" BorderBrush="#444" BorderThickness="2" CornerRadius="7" Width="70" Height="70">
+                            <Grid>
+                                <PathIcon HorizontalAlignment="Center" VerticalAlignment="Center" Width="36" Height="36" x:Name="DefaultCover"  Data="m30 4.125v20.25a1.146 1.146 90 01-.006.12 5.25 5.25 90 11-2.244-4.053v-8.805L15 15.462v11.913a1.134 1.134 90 01-.006.1185 5.25 5.25 90 11-2.244-4.053V8.625a1.125 1.125 90 01.8025-1.077l15-4.5A1.125 1.125 90 0130 4.125z"/>
+                                <Image x:Name="Cover" Stretch="Uniform"/>
+                            </Grid>
+                        </Border>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Spacing="5">
+                            <TextBlock x:Name="Title" MaxWidth="200"  FontSize="18" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Text="Test Title"/>
+                            <TextBlock x:Name="Artist" MaxWidth="200" FontSize="14" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" Text="Test Artist" Foreground="#777777"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Button>
+
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal" Spacing="6">
+                    <Button Width="40" Height="40" CornerRadius="10" BorderThickness="0" Background="Transparent">
+                        <Grid>
+                            <FontIcon FontSize="18" Glyph="&#xE8B1;"/>
+                            <PathIcon x:Name="ShuffleBtnIcon" Visibility="Collapsed" Data="M.6339 2.0187 11.9497 13.3345a1 1 45 101.4142-1.4142L2.0481.6045a1 1 45 10-1.4142 1.4142Z"/>
+                        </Grid>
+                    </Button>
+                    <Button Width="40" Height="40" CornerRadius="10" BorderThickness="0" Background="Transparent" x:Name="PreviousButton">
+                        <FontIcon FontSize="18" Glyph="&#xF8AC;"/>
+                    </Button>
+                    <Button Width="56" Height="56" CornerRadius="30" BorderThickness="3" BorderBrush="{ThemeResource SystemAccentColor}">
+                        <Grid>
+                            <FontIcon Visibility="Visible" FontSize="20" Glyph="&#xF5B0;" x:Name="PlayIcon"/>
+                            <FontIcon Visibility="Collapsed" FontSize="20" Glyph="&#xF8AE;" x:Name="PauseIcon"/>
+                            <PathIcon Visibility="Collapsed" x:Name="SuspendIcon" Data="M20.1 11.1c-1.2-1.2-3-1.8-4.8-1.8-3.9 0-7.2 3.3-7.2 7.2 0 .6 0 1.2.3 1.8l-4.5 3C2.1 22.2 0 21 0 18.9V2.7C0 .6 2.1-.6 3.9.3l14.7 8.1c1.2.6 1.8 1.8 1.5 2.7zm-3.225 9.7126q0 .6852.5012 1.1862t1.1862.5012 1.1862-.5012.5012-1.1862v-6.75q0-.6852-.5012-1.1862t-1.1862-.5012-1.1862.5012-.5012 1.1862v6.75Zm-6.75 0q0 .6852.5014 1.1862t1.1862.5012 1.1862-.5012.5012-1.1862v-6.75q0-.6852-.5012-1.1862t-1.1862-.5012-1.1862.5012-.5014 1.1862v6.75Z"/>
+                        </Grid>
+                    </Button>
+                    <Button Width="40" Height="40" CornerRadius="10" BorderThickness="0" Background="Transparent" x:Name="NextButton">
+                        <FontIcon FontSize="18" Glyph="&#xF8AD;"/>
+                    </Button>
+                    <Button Width="40" Height="40" CornerRadius="10" BorderThickness="0" Background="Transparent">
+                        <FontIcon FontSize="18" Glyph="&#xE8EE;" x:Name="RepeatBtnIcon"/>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal" Spacing="5">
+                    <Button Height="40" Width="40" Padding="0" CornerRadius="10" Background="Transparent" BorderBrush="Transparent" x:Name="VolumeButton">
+                        <FontIcon FontSize="18" x:Name="VolumeIcon" Glyph="&#xE995;"/>
+                        <Button.Flyout>
+                            <Flyout x:Name="VolumeFlyout">
+                                <Grid MinWidth="100" ColumnSpacing="15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*" MinWidth="100"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Grid.Column="0" VerticalAlignment="Center" Background="Transparent" BorderBrush="Transparent" Padding="8">
+                                        <FontIcon FontSize="20" Glyph="{x:Bind VolumeIcon.Glyph, Mode=OneWay}" />
+                                    </Button>
+                                    <Slider Grid.Column="1" x:Name="VolumeSlider" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="2" VerticalAlignment="Center" Width="25" FontSize="16" Text="{x:Bind VolumeSlider.Value, Mode=OneWay}"/>
+                                </Grid>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                    <Button Height="40" Width="40" Padding="0" CornerRadius="10" Background="Transparent" BorderBrush="Transparent">
+                        <FontIcon FontSize="18" Glyph="&#xE712;"/>
+                        <Button.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="Properties">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE946;"/>
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>
